@@ -16,7 +16,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/auth' exact component={() => (checkEmptyObject(user) ? <Auth /> : <Redirect to="/" />)} />
+          <Route path='/auth' exact component={() => ((checkEmptyObject(user) || user === null) ? <Auth /> : <Redirect to="/" />)} />
         </Switch>
       </Router>
     </div>

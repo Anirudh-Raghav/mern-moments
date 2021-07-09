@@ -12,13 +12,13 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAllPosts());
-    }, [currentId, dispatch]);
+    }, []);
 
     return (
         <Container >
             <div className='row'>
                 <div className='col-sm-3 d-flex justify-content-center'>
-                    <PostForm setCurrentId={setCurrentId} />
+                    <PostForm currentId={currentId} setCurrentId={setCurrentId} />
                 </div>
                 <div className='col-sm-9'>
                     <PostGallery setCurrentId={setCurrentId} />
@@ -27,5 +27,6 @@ const Home = () => {
         </Container>
     )
 }
+
 
 export default Home

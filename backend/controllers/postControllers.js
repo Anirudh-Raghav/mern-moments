@@ -29,12 +29,9 @@ export const getPost = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-    const { title, message, author, tags } = req.body;
+    const { title, message, image, author, tags } = req.body;
 
-    const { path: url, filename } = req.files;
-    console.log();
-
-    const newPost = new PostModel({ title, message, image: { url, filename }, author, tags })
+    const newPost = new PostModel({ title, message, image, author, tags })
 
     try {
         await newPost.save();
@@ -49,11 +46,11 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const { id } = req.params;
-    const { title, message, author, image, tags } = req.body;
+    const { title, message, author, image, tags, likes } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ success: false, message: `No post with id: ${id}` });
 
-    const updatedPost = { title, message, author, tags, image, _id: id };
+    const updatedPost = { title, message, author, tags, image, likes, _id: id };
 
     try {
         await PostModel.findByIdAndUpdate(id, updatedPost, { new: true });

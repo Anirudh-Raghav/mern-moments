@@ -18,13 +18,15 @@ const PostForm = ({ currentId, setCurrentId }) => {
 
     const clear = () => {
         setCurrentId(0);
-        setPostData({ title: '', message: '', tags: '', image: '' });
+        setPostData({ title: '', message: '', tags: '', image: {} });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (currentId === 0) dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
+        if (currentId) {
+            dispatch(updatePost(currentId, { ...postData, author: user?.result?._id, likes: post.likes }))
+        }
         else dispatch(createPost({ ...postData, author: user?.result?._id }))
 
         clear();
@@ -79,19 +81,21 @@ const PostForm = ({ currentId, setCurrentId }) => {
                     />
                 </div>
 
-                <div className='mb-2'>
+                <div className='mb-4'>
                     <label className='form-label' htmlFor="image">Image</label>
                     <br />
-                    {/* <FileBase
+                    <FileBase
                         className='form-control'
                         type='file'
                         multiple={false}
-                        onDone={(base64) => setPostData({ ...postData, image: base64 })} /> */}
-                    <input
-                        className='form-control'
-                        type="file"
-                        name="image"
-                        id="image" onChange={(e) => setPostData({ ...postData, image: e.target.value })} />
+                        onDone={(base64) => {
+                            const imageDetails = {
+                                url: base64.base64,
+                                filename: base64.name
+                            };
+
+                            setPostData({ ...postData, image: imageDetails })
+                        }} />
                 </div>
 
                 <div className='d-flex justify-content-around mt-3 mb-2'>

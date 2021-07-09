@@ -26,8 +26,7 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
         <Card className='card'>
-            {/* <Card.Img className='card-img-top' variant='top' src={post.image} alt='' /> */}
-            <img className='card-img-top' src={post.image.url} alt={post.image.filename} />
+            <img className='card-img-top' src={'post.image.url' || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} alt="" />
             <Card.Subtitle className='card-img-text'>{post?.author.name}</Card.Subtitle>
             <Card.Subtitle className='card-date'>{moment(post.createdAt).fromNow()}</Card.Subtitle>
             <Card.Body>

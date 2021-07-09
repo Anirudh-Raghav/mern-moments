@@ -22,7 +22,10 @@ export const fetchPosts = () => API.get('/posts');
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const updatePost = (id, updatedPost) => API.put(`/posts/${id}`, updatedPost);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
-export const likePost = (id) => API.put(`/posts/${id}/like`);
+export const likePost = (id) => {
+    console.log(`like towards the post with id=${id}`)
+    return API.put(`/posts/${id}/like`)
+};
 
 
 // AUTHENTICATION ROUTES

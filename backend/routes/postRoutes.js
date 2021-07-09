@@ -1,17 +1,14 @@
 import express from 'express';
-import multer from 'multer';
 
 import { getAllPosts, getPost, createPost, updatePost, likePost, deletePost } from '../controllers/postControllers.js';
 import validateToken from '../middleware/jwt.js'
-import { storage } from '../cloudinary';
 
-const upload = multer({ storage });
 
 const router = express.Router();
 
 router.route('/')
     .get(getAllPosts)
-    .post(validateToken, upload.single('image'), createPost);
+    .post(validateToken, createPost);
 
 router.route('/:id')
     .get(validateToken, getPost)

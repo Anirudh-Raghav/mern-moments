@@ -13,7 +13,6 @@ import './postGallery.css';
 import Post from './post/post';
 
 const PostGallery = ({ setCurrentId }) => {
-
     const posts = useSelector((state) => state.posts);
 
     return (
